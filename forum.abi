@@ -73,6 +73,10 @@
         {
           "name": "vote_value",
           "type": "string"
+        },
+        {
+          "name": "json_metadata",
+          "type": "string"
         }
       ]
     }
