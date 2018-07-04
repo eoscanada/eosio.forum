@@ -45,12 +45,17 @@ class forum : public eosio::contract {
         }
 
         // @abi
-        void vote(const account_name voter, const std::string& proposition, const std::string& proposition_hash, const std::string& vote_value) {
+        void vote(const account_name voter, const std::string& proposition, const std::string& proposition_hash, const std::string& vote_value, const std::string& json_metadata) {
             require_auth(voter);
             eosio_assert(proposition.size() < 256, "Proposition reference should be less than 256 characters long.");
             eosio_assert(proposition_hash.size() < 128, "proposition_hash should be less than 128 characters long.");
             eosio_assert(vote_value.size() > 0, "Vote value should be at least 1 character.");
             eosio_assert(vote_value.size() < 128, "Vote value should be less than 128 characters long.");
+
+            if (json_metadata.size() != 0) {
+                eosio_assert(json_metadata[0] == '{', "json_metadata must be a JSON object (if specified).");
+                eosio_assert(json_metadata.size() < 8192, "json_metadata should be shorter than 8192 bytes.");
+            }
         }
 };
 
