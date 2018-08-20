@@ -1,6 +1,8 @@
 A simple forum, messaging and voting system for EOS
 ===================================================
 
+[点击查看中文版](./README-cn.md)
+
 This forum stores nothing in the in-RAM blockchain state. It allows authenticated
 messages to go through, where they are visible in the transaction history of the chain.
 Off-chain tools are needed to sort, display, aggregate and report on the outputs
