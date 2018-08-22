@@ -102,10 +102,12 @@ class forum : public eosio::contract {
             time                   updated_at;
 
             auto primary_key() const { return id; }
+            uint64_t by_proposal() const { return proposal_name; }
             uint128_t by_vote_key() const { return forum::compute_vote_key(proposal_name, voter); }
         };
         typedef eosio::multi_index<
             N(vote), voterow,
+            indexed_by<N(proposal), const_mem_fun<voterow, uint64_t, &voterow::by_proposal>>,
             indexed_by<N(votekey), const_mem_fun<voterow, uint128_t, &voterow::by_vote_key>>
         > votes;
 

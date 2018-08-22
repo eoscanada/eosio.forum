@@ -301,8 +301,8 @@
       "name": "vote",
       "type": "voterow",
       "index_type": "i64",
-      "key_names" : ["id"],
-      "key_types" : ["i64"]
+      "key_names" : ["id", "proposal_name", "voter_key"],
+      "key_types" : ["i64", "name", "i128"]
     }
   ],
   "clauses": [],
