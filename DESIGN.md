@@ -17,34 +17,34 @@ New actions
 -----------
 
  * `propose` - Create a new proposition
-   
-   Asserts: 
+
+   Asserts:
      * `proposal_name` isn't `status`, NOR `proposal`... as to not confuse table names in the contract itself.
 
  * `vote` - Vote for a given proposition
- 
+
     Fields: `proposer, proposal_name, voter, vote, vote_json`
 
-    Asserts: 
+    Asserts:
       * Proposals still exists
 
  * `unvote` - Unvote for a given proposition
- 
+
    Fields: `proposer, proposal_name, voter`
-  
+
    Notes:
     * Works even if proposal doesn't exist anymore
 
 
  * `unpropose` - Erase a proposal
- 
+
     Fields: `proposer, proposal_name`
 
  * `cleanvotes`
-  
+
     Fields: `proposer, proposal_name, count`
 
-    Asserts: 
+    Asserts:
      * The `proposer+proposal_name` doesn't exist anymore, or is expired.
 
 Tables

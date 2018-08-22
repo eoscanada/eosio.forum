@@ -12,11 +12,11 @@ EOSIO_ABI(forum, (post)(unpost)(propose)(unpropose)(vote)(unvote)(cleanvotes)(st
 
 // @abi
 void forum::post(
-    const account_name poster, 
-    const std::string& post_uuid, 
+    const account_name poster,
+    const std::string& post_uuid,
     const std::string& content,
-    const account_name reply_to_poster, 
-    const std::string& reply_to_post_uuid, 
+    const account_name reply_to_poster,
+    const std::string& reply_to_post_uuid,
     const bool certify,
     const std::string& json_metadata
 ) {
@@ -49,8 +49,8 @@ void forum::unpost(const account_name poster, const std::string& post_uuid) {
 
 // @abi
 void forum::propose(
-    const account_name proposer, 
-    const name proposal_name, 
+    const account_name proposer,
+    const name proposal_name,
     const std::string& title,
     const std::string& proposal_json
 ) {
@@ -92,7 +92,7 @@ void forum::status(const account_name account, const std::string& content) {
         auto& row = status_table.get(account, "no previous status entry for this account.");
         status_table.erase(row);
     } else {
-        update_status(status_table, account, [&](auto& row) { 
+        update_status(status_table, account, [&](auto& row) {
             row.content = content;
         });
     }
@@ -100,11 +100,11 @@ void forum::status(const account_name account, const std::string& content) {
 
 // @abi
 void forum::vote(
-    const account_name voter, 
-    const account_name proposer, 
-    const name proposal_name, 
-    const std::string& proposal_hash, 
-    uint8_t vote, 
+    const account_name voter,
+    const account_name proposer,
+    const name proposal_name,
+    const std::string& proposal_hash,
+    uint8_t vote,
     const std::string& vote_json
 ) {
     require_auth(voter);
@@ -142,13 +142,13 @@ void forum::unvote(
     eosio_assert(proposal_hash.size() < 128, "proposal_hash should be less than 128 characters long.");
 
     votes vote_table(_self, proposer);
-    
+
     auto index = vote_table.template get_index<N(votekey)>();
     auto vote_key = compute_vote_key(proposal_name, voter);
 
     auto itr = index.find(vote_key);
     eosio_assert(itr != index.end(), "no vote exists for this proposal_name/voter pair");
-    
+
     vote_table.erase(*itr);
 }
 
@@ -193,27 +193,21 @@ void forum::update_status(
             updater(row);
         });
     } else {
-        status_table.modify(itr, account, [&](auto& row) { 
+        status_table.modify(itr, account, [&](auto& row) {
             row.updated_at = now();
-            updater(row); 
+            updater(row);
         });
     }
 }
 
 void forum::update_vote(
     votes& vote_table,
-    const name proposal_name, 
-    const account_name voter, 
+    const name proposal_name,
+    const account_name voter,
     const function<void(voterow&)> updater
 ) {
     auto index = vote_table.template get_index<N(votekey)>();
-
-    eosio::print("Proposal name ", proposal_name, " ", proposal_name.value, "\n");
-    eosio::print("Voter ", voter, "\n");
-
     auto vote_key = compute_vote_key(proposal_name, voter);
-
-    eosio::print("Voter key ", vote_key, "\n");
 
     auto itr = index.find(vote_key);
     if (itr == index.end()) {
@@ -225,17 +219,17 @@ void forum::update_vote(
             updater(row);
         });
     } else {
-        index.modify(itr, voter, [&](auto& row) { 
+        index.modify(itr, voter, [&](auto& row) {
             row.updated_at = now();
-            updater(row); 
+            updater(row);
         });
     }
 }
 
 // Do not use directly, use the VALIDATE_JSON macro instead!
 void forum::validate_json(
-    const string& payload, 
-    size_t max_size, 
+    const string& payload,
+    size_t max_size,
     const char* not_object_message,
     const char* over_size_message
 ) {

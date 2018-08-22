@@ -1,6 +1,6 @@
 ## Tests
 
-This folder contains a bunch of tests for this contract. 
+This folder contains a bunch of tests for this contract.
 
 ### Quick Start
 
@@ -54,6 +54,13 @@ This folder contains a bunch of tests for this contract.
     data:
         creator: eosio
         new_account: voter2
+        pubkey: EOS5MHPYyhjBjnQZejzZHqHewPWhGTfQWSVTWYEhDmJu4SXkzgweP
+
+    - op: system.newaccount
+    label: Create zzzzzzzzzzzz account for eosioforum
+    data:
+        creator: eosio
+        new_account: zzzzzzzzzzzz
         pubkey: EOS5MHPYyhjBjnQZejzZHqHewPWhGTfQWSVTWYEhDmJu4SXkzgweP
     ```
 

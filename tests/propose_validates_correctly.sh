@@ -19,7 +19,7 @@ action_ko propose proposer1@active \
 
 # FIXME: This passes while it should not, however, a second invocation yields CPU time exceed.
 #        I suspect that parsing that amount of JSON data exceed the CPU time allowed to the transaction.
-#        Will need to play with infinite CPU time to validate this hypothesis. 
+#        Will need to play with infinite CPU time to validate this hypothesis.
 # action_ko propose proposer1@active \
 # "{\"proposer\":\"proposer1\", \"proposal_name\":\"provalcorr1\", \"title\":\"a\", \"proposal_json\":\"${proposal_json_too_long}\"}" \
 # 'proposal_json should be shorter than 32768 bytes'

@@ -24,6 +24,9 @@ action_ok propose proposer1@active \
 action_ok propose proposer1@active \
 '{"proposer":"proposer1", "proposal_name":"11", "title":"A simple one", "proposal_json":null}'
 
+action_ok propose proposer1@active \
+'{"proposer":"proposer1", "proposal_name":"zzzzzzzzzzzz", "title":"A simple one", "proposal_json":null}'
+
 ### Votes
 
 #### Voter1
@@ -56,3 +59,11 @@ action_ok vote voter2@active \
 
 action_ok vote voter2@active \
 '{"voter":"voter2","proposer":"proposer1","proposal_name":"11","proposal_hash":"","vote":1,"vote_json":""}'
+
+#### zzzzzzzzzzzz (Voter)
+
+action_ok vote zzzzzzzzzzzz@active \
+'{"voter":"zzzzzzzzzzzz","proposer":"proposer1","proposal_name":"a1","proposal_hash":"","vote":1,"vote_json":""}'
+
+action_ok vote zzzzzzzzzzzz@active \
+'{"voter":"zzzzzzzzzzzz","proposer":"proposer1","proposal_name":"z1","proposal_hash":"","vote":1,"vote_json":""}'
