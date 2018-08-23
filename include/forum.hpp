@@ -4,6 +4,7 @@
 #include <string>
 
 #include <eosiolib/eosio.hpp>
+#include <eosiolib/crypto.h>
 
 using eosio::const_mem_fun;
 using eosio::indexed_by;
@@ -20,47 +21,46 @@ class forum : public eosio::contract {
         // @abi
         void post(
             const account_name poster,
-            const std::string& post_uuid,
-            const std::string& content,
+            const string& post_uuid,
+            const string& content,
             const account_name reply_to_poster,
-            const std::string& reply_to_post_uuid,
+            const string& reply_to_post_uuid,
             const bool certify,
-            const std::string& json_metadata
+            const string& json_metadata
         );
 
         // @abi
-        void unpost(const account_name poster, const std::string& post_uuid);
+        void unpost(const account_name poster, const string& post_uuid);
 
         // @abi
         void propose(
             const account_name proposer,
             const name proposal_name,
-            const std::string& title,
-            const std::string& proposal_json
+            const string& title,
+            const string& proposal_json
         );
 
         // @abi
         void unpropose(const account_name proposer, const name proposal_name);
 
         // @abi
-        void status(const account_name account, const std::string& content);
+        void status(const account_name account, const string& content);
 
         // @abi
         void vote(
             const account_name voter,
             const account_name proposer,
             const name proposal_name,
-            const std::string& proposal_hash,
+            const string& proposal_hash,
             uint8_t vote_value,
-            const std::string& vote_json
+            const string& vote_json
         );
 
         // @abi
         void unvote(
             const account_name voter,
             const account_name proposer,
-            const name proposal_name,
-            const std::string& proposal_hash
+            const name proposal_name
         );
 
         // @abi
@@ -71,14 +71,32 @@ class forum : public eosio::contract {
         );
 
     private:
+        static uint8_t hex_char_to_uint8(char character) {
+            const int x = character;
+
+            return ((x <= 57) ? x - 48 : ((x <= 70) ? (x - 65) + 0x0a : (x - 97) + 0x0a));
+        }
+
+        static void proposal_hash_to_checksum256(const string& proposal_hash, checksum256* checksum) {
+            const char* characters = proposal_hash.c_str();
+            for (uint64_t i = 0; i < proposal_hash.size(); i += 2) {
+                checksum->hash[i / 2] = 16 * hex_char_to_uint8(characters[i]) + hex_char_to_uint8(characters[i + 1]);
+            }
+        }
+
+        static void compute_proposal_hash(const string& proposal_title, const string& proposal_json, checksum256* hash) {
+            const string content = proposal_title + proposal_json;
+            sha256(content.c_str(), content.size(), hash);
+        }
+
         static uint128_t compute_vote_key(const name proposal_name, const account_name voter) {
             return ((uint128_t) proposal_name.value) << 64 | voter;
         }
 
         struct proposal {
             name           proposal_name;
-            std::string    title;
-            std::string    proposal_json;
+            string         title;
+            string         proposal_json;
 
             auto primary_key()const { return proposal_name.value; }
         };
@@ -86,7 +104,7 @@ class forum : public eosio::contract {
 
         struct statusrow {
             account_name   account;
-            std::string    content;
+            string         content;
             time           updated_at;
 
             auto primary_key() const { return account; }
@@ -96,6 +114,7 @@ class forum : public eosio::contract {
         struct voterow {
             uint64_t               id;
             name                   proposal_name;
+            string                 proposal_hash;
             account_name           voter;
             uint8_t                vote;
             string                 vote_json;

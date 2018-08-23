@@ -39,8 +39,8 @@ action_ko post poster1@active \
 
 action_ko post poster1@active \
 "{\"poster\":\"poster1\", \"post_uuid\":\"a\", \"content\":\"a\", \"reply_to_poster\":\"poster2\", \"reply_to_post_uuid\":\"any\", \"certify\":true, \"json_metadata\":\"${json_metadata_not_object}\"}" \
-'json_metadata must be a JSON object (if specified)'
+'json_metadata must be a JSON object (if specified).'
 
 action_ko post poster1@active \
 "{\"poster\":\"poster1\", \"post_uuid\":\"a\", \"content\":\"a\", \"reply_to_poster\":\"poster2\", \"reply_to_post_uuid\":\"any\", \"certify\": true, \"json_metadata\":\"${json_metadata_too_long}\"}" \
-'json_metadata should be shorter than 8192 bytes'
+'json_metadata should be shorter than 8192 bytes.'

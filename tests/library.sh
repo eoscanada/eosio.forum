@@ -12,6 +12,10 @@ print_config() {
     echo " Contract: ${CONTRACT}"
 }
 
+random_name() {
+    echo `head /dev/urandom | LC_ALL=C tr -dc 'a-z1-5' | head -c 12`
+}
+
 # usage: action_ok <action> <permission> <json>
 action_ok() {
     info -n "Pushing OK action '$1 ($2)' ... "
