@@ -10,5 +10,5 @@ action_ok propose proposer2@active \
 
 action_ko propose proposer1@active \
 '{"proposer":"proposer1", "proposal_name":"simplef1", "title":"A simple one", "proposal_json":null}' \
-"proposal with the same name exists"
+"proposal with the same name exists."
 

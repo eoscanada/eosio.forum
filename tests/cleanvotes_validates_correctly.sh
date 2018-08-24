@@ -7,4 +7,4 @@ action_ok propose proposer1@active \
 
 action_ko cleanvotes proposer1@active \
 '{"proposer":"proposer1", "proposal_name":"clrfipro1", "max_count": 1}' \
-'proposal_name must not exist anymore'
+'proposal_name must not exist anymore.'

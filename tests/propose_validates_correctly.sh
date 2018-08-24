@@ -11,11 +11,11 @@ action_ko propose proposer2@active \
 
 action_ko propose proposer1@active \
 "{\"proposer\":\"proposer1\", \"proposal_name\":\"provalcorr1\", \"title\":"${CHARS_1250}", \"proposal_json\":null}" \
-'title should be less than 1024 characters long'
+'title should be less than 1024 characters long.'
 
 action_ko propose proposer1@active \
 "{\"proposer\":\"proposer1\", \"proposal_name\":\"provalcorr1\", \"title\":\"a\", \"proposal_json\":\"${proposal_json_not_object}\"}" \
-'proposal_json must be a JSON object (if specified)'
+'proposal_json must be a JSON object (if specified).'
 
 # FIXME: This passes while it should not, however, a second invocation yields CPU time exceed.
 #        I suspect that parsing that amount of JSON data exceed the CPU time allowed to the transaction.

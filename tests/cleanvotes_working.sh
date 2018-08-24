@@ -33,7 +33,7 @@ action_ok unpropose proposer1@active \
 action_ok cleanvotes proposer1@active \
 '{"proposer":"proposer1", "proposal_name":"clvotwo1v1", "max_count": 1}'
 
-table_row vote proposer1 '!"proposal_name": "clvotwo1v1", "voter": "voter1"'
+table_row vote proposer1 '!"proposal_name": "clvotwo1v1", "proposal_hash": "", "voter": "voter1"'
 
 println
 
@@ -56,8 +56,8 @@ action_ok unpropose proposer1@active \
 action_ok cleanvotes proposer1@active \
 '{"proposer":"proposer1", "proposal_name":"clvotwonv1", "max_count": 1000}'
 
-table_row vote proposer1 '!"proposal_name": "clvotwonv1", "voter": "voter1"'
-table_row vote proposer1 '!"proposal_name": "clvotwonv1", "voter": "voter2"'
+table_row vote proposer1 '!"proposal_name": "clvotwonv1", "proposal_hash": "", "voter": "voter1"'
+table_row vote proposer1 '!"proposal_name": "clvotwonv1", "proposal_hash": "", "voter": "voter2"'
 
 println
 
@@ -80,11 +80,11 @@ action_ok unpropose proposer1@active \
 action_ok cleanvotes proposer1@active \
 '{"proposer":"proposer1", "proposal_name":"clvotwonvmp1", "max_count": 1}'
 
-table_row vote proposer1 '!"proposal_name": "clvotwonvmp1", "voter": "voter1"'
-table_row vote proposer1 '"proposal_name": "clvotwonvmp1", "voter": "voter2"'
+table_row vote proposer1 '!"proposal_name": "clvotwonvmp1", "proposal_hash": "", "voter": "voter1"'
+table_row vote proposer1 '"proposal_name": "clvotwonvmp1", "proposal_hash": "", "voter": "voter2"'
 
 action_ok cleanvotes proposer1@active \
 '{"proposer":"proposer1", "proposal_name":"clvotwonvmp1", "max_count": 1}'
 
-table_row vote proposer1 '!"proposal_name": "clvotwonvmp1", "voter": "voter1"'
-table_row vote proposer1 '!"proposal_name": "clvotwonvmp1", "voter": "voter2"'
+table_row vote proposer1 '!"proposal_name": "clvotwonvmp1", "proposal_hash": "", "voter": "voter1"'
+table_row vote proposer1 '!"proposal_name": "clvotwonvmp1", "proposal_hash": "", "voter": "voter2"'

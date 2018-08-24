@@ -147,10 +147,6 @@
         {
           "name": "proposal_name",
           "type": "name"
-        },
-        {
-          "name": "proposal_hash",
-          "type": "string"
         }
       ]
     },
@@ -220,6 +216,10 @@
         {
           "name": "proposal_name",
           "type": "name"
+        },
+        {
+          "name": "proposal_hash",
+          "type": "string"
         },
         {
           "name": "voter",
