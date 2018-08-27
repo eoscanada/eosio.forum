@@ -58,7 +58,7 @@ static bool starts_with(const string& value, const string& prefix) {
 }
 
 static string to_hex(uint64_t value) {
-    std::stringstream stream;
+    stringstream stream;
     stream << "0x" << std::hex << value;
     auto hex_string = stream.str();
 
@@ -68,7 +68,7 @@ static string to_hex(uint64_t value) {
 static string hex_string_to_little_endian(const string& value) {
     if (value.size() <= 0) return "";
 
-    std::stringstream stream;
+    stringstream stream;
     int offset = 0;
     if (starts_with(value, "0x")) {
         stream << "0x";
