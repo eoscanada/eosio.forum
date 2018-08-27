@@ -7,6 +7,8 @@ export CHARS_6250="${CHARS_1250}${CHARS_1250}${CHARS_1250}${CHARS_1250}${CHARS_1
 export CHARS_13000="${CHARS_6250}${CHARS_6250}"
 export CHARS_37500="${CHARS_13000}${CHARS_13000}${CHARS_6250}"
 
+export EXPIRES_AT=`date -u -v+1d +"%Y-%m-%dT%H:%M:%S"`
+
 print_config() {
     echo "Config"
     echo " Contract: ${CONTRACT}"
@@ -87,8 +89,13 @@ table_row() {
 
 BROWN='\033[0;33m'
 GREEN='\033[0;32m'
+BLUE='\033[0;34m'
 RED='\033[0;31m'
 NC='\033[0m'
+
+msg() {
+    if [[ $1 != "-n" ]]; then println $BLUE "${@}"; else shift; print $BLUE "${@}"; fi
+}
 
 info() {
     if [[ $1 != "-n" ]]; then println $BROWN "${@}"; else shift; print $BROWN "${@}"; fi
