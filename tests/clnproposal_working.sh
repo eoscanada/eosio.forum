@@ -5,7 +5,7 @@ ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"; source "${ROOT}/librar
 ###
 # **Important**
 #
-# Usually, the freeze period before cleaning proposal is 3 days. The tests
+# Usually, the freeze period before cleaning proposal is 30 days. The tests
 # in this file expect that the freeze period is set to 2s only!
 #
 # You will need to modify the source code of the contract before running

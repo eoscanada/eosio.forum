@@ -108,7 +108,7 @@ void forum::unvote(const name voter, const name proposal_name) {
  *
  * This method allows anyone to clean a proposal if the proposal is either expired or does
  * not exist anymore. This exact case can only happen either by itself (the proposal has reached
- * its expiration time) or by the a proposer action (`expire`). In either case, 3 days must elapse before calling `clnproposal`.
+ * its expiration time) or by the a proposer action (`expire`). In either case, 30 days must elapse before calling `clnproposal`.
  *
  * In all cases it's ok to let anyone clean the votes since there is no more "use"
  * for the proposal nor the votes.
@@ -119,7 +119,7 @@ void forum::clnproposal(const name proposal_name, uint64_t max_count) {
 
     auto itr = proposal_table.find(proposal_name.value);
     eosio_assert(itr == proposal_table.end() || itr->can_be_cleaned_up(),
-                 "proposal must not exist or be expired for at least 3 days prior to running clnproposal.");
+                 "proposal must not exist or be expired for at least 30 days prior to running clnproposal.");
 
     votes vote_table(_self, _self.value);
     auto index = vote_table.template get_index<"byproposal"_n>();

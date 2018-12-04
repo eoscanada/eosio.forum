@@ -41,7 +41,7 @@ This amends the proposal's `expires_at` field to the current time instead of wai
 its original expiration date to be reached.
 
 Once a proposal is expired (be it manually or automatically if it passed its expiration date), the
-proposal enters a 3 day freeze period. Within this freeze period, the proposal is locked
+proposal enters a 30 days freeze period. Within this freeze period, the proposal is locked
 and no actions can be called on it (no vote changes, no vote removal (`unvote`) and no clean up).
 This is to allow a period where multiple tools can query the results for cross-verification.
 Once a proposal has ended its freeze period, it's now possible to clean it via the `clnproposal` action.
@@ -143,7 +143,7 @@ executes all the integration tests found in `tests` folder (see [all.sh](./tests
 for exact files picked up).
 
 To correctly run the tests, you will need to switch the freeze period of
-a proposal for 2 seconds (waiting 3 days could be a bit too long!). The `tests.sh`
+a proposal for 2 seconds (waiting 30 days could be a bit too long!). The `tests.sh`
 script takes also care of this changing the freeze period automatically for you
 to 2 seconds so it looks like this instead when the tests runs:
 
@@ -246,7 +246,7 @@ Remove your current active vote, effectively reclaiming the stored RAM of the vo
 your vote will not count anymore (neither positively or negatively) on the current proposal's voting
 statistics.
 
-It's **not** possible to `unvote` on a proposal that is expired but within its freeze period of 3 days.
+It's **not** possible to `unvote` on a proposal that is expired but within its freeze period of 30 days.
 If the proposal is expired and the freeze period has elapsed, it's possible to `unvote` on the proposal.
 To be nice to the community however, you should call [clnproposal](#action-clnproposal) until the proposal
 is fully cleaned up so that every vote will be removed and RAM will be freed for all voters.
@@ -261,7 +261,7 @@ is fully cleaned up so that every vote will be removed and RAM will be freed for
 
 - When missing signature of `voter`
 - When `proposal_name` does not exist
-- When `proposal_name` is expired but within its freeze period of 3 days
+- When `proposal_name` is expired but within its freeze period of 30 days
 
 ##### Example
 
@@ -309,7 +309,7 @@ are no more votes, the proposal itself is deleted.
 This effectively clears all the RAM consumed for a proposal and all its votes. Call the action multiple
 times until all votes are removed.
 
-It's possible to clean a proposal only if it has expired and if its freeze period of 3 days has fully
+It's possible to clean a proposal only if it has expired and if its freeze period of 30 days has fully
 elapsed. Within the freeze period, the proposal is locked and no actions can be performed on it.
 Since only expired proposals can be cleaned, anybody can invoke this action, no authorization is required.
 Voters, proposers, or any community member is invited to call `clnproposal` to clean the RAM related to
@@ -327,7 +327,7 @@ terminated its lifecycle.
 ##### Rejections
 
 - When `proposal_name` is not expired yet
-- When `proposal_name` is expired but within its freeze period of 3 days
+- When `proposal_name` is expired but within its freeze period of 30 days
 
 **Note** Giving a `max_count` that is too big increases the probability that the transaction
 fails due to excessive CPU usage. Find the sweet spot to avoid that.

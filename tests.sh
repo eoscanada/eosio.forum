@@ -3,7 +3,7 @@
 ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd tests && pwd )"
 
 freeze_period_constant_2s='constexpr static uint32_t FREEZE_PERIOD_IN_SECONDS = 2; // NEVER MERGE LIKE THIS'
-freeze_period_constant_30d='constexpr static uint32_t FREEZE_PERIOD_IN_SECONDS = 3 \* 24 \* 60 \* 60;'
+freeze_period_constant_30d='constexpr static uint32_t FREEZE_PERIOD_IN_SECONDS = 30 \* 24 \* 60 \* 60;'
 
 include_file="$ROOT/../include/forum.hpp"
 include_backup_file="$ROOT/../include/forum.hpp.bak"

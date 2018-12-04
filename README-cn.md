@@ -33,7 +33,7 @@
 调用 `expire` 命令，它只有 `proposal_name` 这个参数。
 它可以将提案的 `expires_at` 字段修改为当前时间，而不是等待它原始的到期时间。
 
-提案过期后（无论是手动还是自动过期），进入3天的冻结期。
+提案过期后（无论是手动还是自动过期），进入30天的冻结期。
 在此冻结期内，该提案被锁定，并且不能调用任何操作（包括改投票、删除投票和清理）。
 这时间段是为了让多个工具可以查询结果以进行交叉验证的。
 一旦结束冻结期，可以通过 `clnproposal` 命令清理提案。
@@ -126,12 +126,12 @@ export EOSC_GLOBAL_VAULT_FILE ="`pwd` / tests / eosc-vault.json"
 然后执行 `tests` 文件夹中的所有集成测试（想知道拾取的具体文件，请参见 [all.sh](./tests/all.sh)）。
 
 正确运行测试，你需要要把提案冻结期切换为2秒
-（不然你等3天有点太长了！）
+（不然你等30天有点太长了！）
 
 在文件 [include/forum.hpp](./include/forum.hpp) 中，把下面这行：
 
 ```
-constexpr static uint32_t FREEZE_PERIOD_IN_SECONDS = 3 * 24 * 60 * 60;
+constexpr static uint32_t FREEZE_PERIOD_IN_SECONDS = 30 * 24 * 60 * 60;
 ```
 
 改成这样：
@@ -257,7 +257,7 @@ eosc forum vote voter1 example 0
 
 - 当缺少 `voter` 的签名时
 - 当`proposal_name`不存在时
-- 当`proposal_name`过期但在其3天冻结期内时
+- 当`proposal_name`过期但在其30天冻结期内时
 
 ##### 例如
 
@@ -307,7 +307,7 @@ eosc forum expire proposer1 example
 
 这可以有效清除提案及其所有投票所占用的RAM，多次调用操作直到所有选票都被删除。
 
-只有在提案过期，并且过了它的3天冻结期，提案才能被清除。在冻结期间，提案被锁定并且不接受任何操作。
+只有在提案过期，并且过了它的30天冻结期，提案才能被清除。在冻结期间，提案被锁定并且不接受任何操作。
 
 由于只有过期的提案可以被清理，任何人都可以调用此操作，无需授权。
 
@@ -325,7 +325,7 @@ eosc forum expire proposer1 example
 ##### 拒绝情况
 
 - 当`proposal_name`尚未过期时
-- 当`proposal_name`过期但在其3天冻结期内时
+- 当`proposal_name`过期但在其30天冻结期内时
 
 **注意**给予 `max_count` 的值太大会增加此交易失败的概率，
 由于可能导致CPU使用率过高。 找到最佳点以避免这种情况。

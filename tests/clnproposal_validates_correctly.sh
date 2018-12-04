@@ -9,7 +9,7 @@ action_ok propose proposer1@active \
 
 action_ko clnproposal proposer1@active \
 '{"proposal_name":"clrfiprone4", "max_count": 1}' \
-'proposal must not exist or be expired for at least 3 days prior to running clnproposal.'
+'proposal must not exist or be expired for at least 30 days prior to running clnproposal.'
 
 println
 
@@ -23,4 +23,4 @@ action_ok expire proposer1@active \
 
 action_ko clnproposal proposer1@active \
 '{"proposal_name":"clrfiprogp4", "max_count": 1}' \
-'proposal must not exist or be expired for at least 3 days prior to running clnproposal.'
+'proposal must not exist or be expired for at least 30 days prior to running clnproposal.'
